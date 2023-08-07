@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+{% for pokemon in pokemon_list%}
+<h3> {{pokemon['name']}} </h3>
+{% for pokemon_ability in pokemon['abilities'] %}
+<p> {{pokemon_ability['ability']['name']}} </p>
+{% endfor %}
+{{ pokemon['base_experience'] }}
+
+{% endfor %}
+
+{% endblock %}

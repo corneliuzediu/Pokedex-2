@@ -1,0 +1,77 @@
+:root {
+    --base-color: red;
+}
+
+
+body {
+    margin: 0;
+    height: 101%;
+    width: 100%;
+    background-color: rgb(249, 243, 162);
+}
+
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+
+* {
+    font-family: cursive !important;
+    box-sizing: border-box;
+}
+
+
+.d-none {
+    display: none !important;
+}
+
+/* Classes for the Header */
+.header__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    padding-inline: 50px;
+    background-color: rgb(56, 110, 156);
+    border-bottom: 2px solid black;
+    box-shadow: 2px 2px 5px 5px rgb(0 0 0 / 40%)
+}
+
+
+.logo__wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+
+.logo__wrapper img:last-child {
+    height: 6rem;
+}
+
+
+.logo__wrapper img:first-child {
+    width: 4rem;
+    height: 4rem;
+    transition: transform 600ms ease-in-out;
+}
+
+
+.logo__wrapper img:first-child:hover {
+    transform: rotate(720deg);
+}
+
+
+.search__wrapper input {
+    padding-inline: 20px;
+    padding-block: 10px;
+    border: unset;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+}
