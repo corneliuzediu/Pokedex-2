@@ -1,30 +1,34 @@
 {% extends "layout.html" %}
 
-{% block main %}
 
+{% block main %}
 <main id="cards__wrapper" class="cards__wrapper">
     {% for pokemon in pokemon_list %}
     <div id="card__container" class='card__container'
-        style="background-color: {{colors_list[pokemon['types'][0]['type']['name']]}};">
+        style="background-color: {{colors_list[pokemon['types'][0]['type']['name']]}};"
+        onclick="document.forms['form_{{pokemon['id']}}'].submit();">
         <div class="card__container--info">
             <h2 id="info__name">{{pokemon['name'] | capitalize}}</h2>
             <h2 id="info__id">{{pokemon['id']}} #</h2>
         </div>
-        {% for type in pokemon['types'] %}
-        <div id="card__container--elements" class="card__container--elements"
-            style="background-color: {{colors_list[type['type']['name']]}};">
-            {{ type['type']['name']}}
+        <div class="card__container--elements">
+            {% for type in pokemon['types'] %}
+            <div class="type__element" style="background-color: {{colors_list[type['type']['name']]}};">
+                {{ type['type']['name']}}
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-        {{ pokemon_list.index(pokemon)}} <!-- get index of pokemon for further infos -->
         <div class="card__container--stats_img">
             <div class="card__container--show_stats">
                 <button>Click for stats! </button>
             </div>
-            <div id="card__container--img" class="card__container--img"><img
-                    src="{{pokemon['sprites']['other']['official-artwork']['front_default']}}" alt="pokemon"></div>
+            <div id="card__container--img" class="card__container--img"><img src="{{pokemon['img']}}" alt="pokemon">
+            </div>
         </div>
     </div>
+    <form action="/" method="post" name="form_{{pokemon['id']}}">
+        <input type="hidden" name="pokemon_id" value="{{pokemon['id']}}">
+    </form>
     {% endfor %}
 </main>
 

@@ -3,7 +3,7 @@ import requests
 POKEAPI_BASE_URL = "https://pokeapi.co/api/v2/pokemon/"
 
 
-def get_pokemon_info(pokemon_id):
+def get_pokemon_info(pokemon_id, type):
     """Fetch information about a Pokemon from the PokeAPI.
 
     Args:
@@ -16,11 +16,27 @@ def get_pokemon_info(pokemon_id):
     print(url)
 
     try:
-        response = requests.get(
-            url, headers={"User-Agent": "python-requests", "Accept": "*/*"}
-        )
-        response.raise_for_status()
-        pokemon_info = response.json()
+        if type == 'preview':
+            response = requests.get(
+                url, headers={"User-Agent": "python-requests", "Accept": "*/*"}
+            )
+            response.raise_for_status()
+            pokemon_all_info = response.json()
+            pokemon_info = {
+                'name': pokemon_all_info['name'],
+                'id': pokemon_all_info['id'],
+                'types': pokemon_all_info['types'],
+                'img': pokemon_all_info['sprites']['other']['official-artwork']['front_default']
+            }
+            print('preview')
+        elif type == 'all':
+            response = requests.get(
+                url, headers={"User-Agent": "python-requests", "Accept": "*/*"}
+            )
+            response.raise_for_status()
+            pokemon_info = response.json()
+            print('all')
+
         return pokemon_info
     except requests.exceptions.HTTPError as http_err:
         print(f"HTTP error occurred: {http_err}")
