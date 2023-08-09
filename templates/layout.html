@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style_card_and_stats.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style_media.css')}}">
+    <script src="{{url_for('static', filename='script/script_templates.js') }}"></script>
     <script src="{{url_for('static', filename='script/script.js') }}"></script>
     <title>Pokedex By Corneliu Zediu</title>
 </head>
@@ -24,6 +25,8 @@
                 onclick="clearSearch(event)">
         </div>
     </nav>
+
+    <!-- <ol id="cards__wrapper" class="cards__wrapper"></ol> -->
 
     {% block main %}{% endblock %}
 
