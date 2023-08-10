@@ -58,10 +58,10 @@ const displayPokemonCard = (pokemon) => {
 }
 
 const pokemonStats = async (id) => {
-    debugger
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
     response = await fetch(url)
     data = await response.json()
+    generateStatsDiv(data);
     showBaseStatsOnClick(data)
 
 }
@@ -74,12 +74,22 @@ function closeStats() {
 
 function showBaseStatsOnClick(data) {
     document.getElementById('stats__wrapper').classList.remove('d-none');
-    generateStatsDiv(data);
+}
+
+
+function showMainStats() {
+    document.getElementById('more__info--container').classList.add('d-none')
+    document.getElementById('base__stats--container').classList.remove('d-none')
+}
+
+
+function showGeneralInfo() {
+    document.getElementById('more__info--container').classList.remove('d-none')
+    document.getElementById('base__stats--container').classList.add('d-none')
 }
 
 function generateStatsDiv(i) {
     let stats_container = document.getElementById('stats__container');
-    stats_container.innerHTML = ``;
     stats_container.innerHTML = templateCardStatDiv(i);
 }
 

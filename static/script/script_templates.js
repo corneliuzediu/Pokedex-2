@@ -26,72 +26,82 @@ function templateCardDiv(pokemon) {
 
 
 //Template for Card Stats 
-function templateCardStatDiv(data) {
-    return `<div id="stats__show--id-${data}" class ="stats__show" onclick="stopPropagation(event)">
+function templateCardStatDiv(pokemon) {
+    const backgroundColor = colors[pokemon.types[0].type.name];
+    let next = parseInt(pokemon['id']) + 1;
+    let previous = parseInt(pokemon['id']) - 1;
+    // Generate HTML Element for each ability
+    const abilities = pokemon.abilities.map(ability => {
+        return `<span class="pokemon-type">${ability.ability['name']}</span>`;
+    }).join(', ')
+    // Generate HTML Element with Genral Info
+    return `<div id="stats__show--id-${pokemon}" class ="stats__show" onclick="stopPropagation(event)" style="background-color: ${backgroundColor}">
                 <div class="stats__info card__container--info">
-                    <h2 id="stats__info__name-${data}">Name</h2>
-                    <h2 id="stats__info__id-${data}"></h2>
+                    <h2>${pokemon['name'].charAt(0).toLocaleUpperCase() + pokemon['name'].slice(1)}</h2>
+                    <h2>${pokemon['id']} #</h2>
                 </div>
                 <div class="stats__img__type">
                     <div class="card__container--stats_img stats__img-container">
-                        <div id="stats__img-1--img-${data}" class="card__container--img"></div>
+                        <div  class="card__container--img"><img src="${pokemon['sprites']['other']['official-artwork']['front_default']}"></div>
                         <div id="stats__img__logo-id" class="stats__img__logo">
-                            <img src="./img/logo.png">
-                            <img src="./img/icon_pokemon.png">
+                            <img src="./static/source/img/logo.png">
+                            <img src="./static/source/img/icon_pokemon.png">
                         </div>
-                        <div id="stats__img-2--img-${data}" class="card__container--img flip_img"></div>
+                        <div class="card__container--img flip_img"><img src="${pokemon['sprites']['other']['official-artwork']['front_default']}"></div>
                     </div>
-                    <div id="stats__card__container--elements-${data}" class="card__container--elements"></div>
+                    <div id="stats__card__container--elements-${pokemon}" class="card__container--elements"></div>
                 </div>
                 <div class="about__container">
                     <div class="info__and__stats">
-                        <button id="more__info--button" class="more__info--button" onclick="showMoreInfo(${data})">More info</button>
-                        <button id="base__stats--button" class="base__stats--button" onclick="showBaseStats(${data})">Base stats</button>
+                        <button id="more__info--button" class="more__info--button" onclick="showGeneralInfo()">General Info</button>
+                        <button id="base__stats--button" class="base__stats--button" onclick="showMainStats()">Main stats</button>
                     </div>
                     <div>
-                        <div id="more__info--container" class="more__info--container d-none">
-                            <div id="species--id-${data}" class="species--class"></div>
-                            <div id="height--id-${data}" class="height--class"></div>
-                            <div id="weight--id-${data}" class="weight--class"></div>
-                            <div id="abilities--id-${data}" class="abilities--class"></div>
+                        <div id="more__info--container" class="more__info--container">
+                            <div id="species--id-" class="species--class">Species: <b>${pokemon['species']['name']}</b></div>
+                            <div id="height--id-${pokemon}" class="height--class">Height: <b>${pokemon.height}</b></div>
+                            <div id="weight--id-${pokemon}" class="weight--class">Weight: <b>${pokemon.weight}</b></div>
+                            <div id="abilities--id-${pokemon}" class="abilities--class">Abilities: <b>${abilities}</b></div>
                         </div>
-                            <div id="base__stats--container" class="base__stats--container"></div>                                             
+                            <div id="base__stats--container" class="base__stats--container d-none">
+                                <div class="stats_bars">
+                                    <h3>Health Points:</h3>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" aria-label="Success example" style="width: ${pokemon.stats[0].base_stat * 0.75}%" aria-valuemin="0" aria-valuemax="100">${pokemon.stats[0].base_stat} </div>
+                                    </div>
+                                    <h3>Attack:</h3>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-danger" role="progressbar" aria-label="Danger example" style="width: ${pokemon.stats[1].base_stat * 0.75}%" aria-valuemin="0" aria-valuemax="100">${pokemon.stats[1].base_stat}</div>
+                                    </div>
+                                    <h3>Defense:</h3>
+                                        <div class="progress">
+                                    <div class="progress-bar bg-warning" role="progressbar" aria-label="Warning example" style="width: ${pokemon.stats[2].base_stat * 0.75}%" aria-valuemin="0" aria-valuemax="100">${pokemon.stats[2].base_stat}</div>
+                                    </div>
+                                    <h3>Special-Attack:</h3>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-danger" role="progressbar" aria-label="Danger example" style="width: ${pokemon.stats[3].base_stat * 0.75}%" aria-valuemin="0" aria-valuemax="100">${pokemon.stats[3].base_stat}</div>
+                                    </div>
+                                    <h3>Special-Defense:</h3>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-warning" role="progressbar" aria-label="Warning example" style="width: ${pokemon.stats[4].base_stat * 0.75}%" aria-valuemin="0" aria-valuemax="100">${pokemon.stats[4].base_stat}</div>
+                                    </div>
+                                    <h3>Speed:</h3>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-info" role="progressbar" aria-label="Info example" style="width: ${pokemon.stats[5].base_stat * 0.75}%" aria-valuemin="0" aria-valuemax="100">${pokemon.stats[5].base_stat}</div>
+                                    </div>
+                                </div>
+                            </div>                                             
                         </div>
                     </div>
                 <div class="stats__buttons">
-                    <button class= "" id= "" onclick= "goPrevious(${data})"><img src="./img/arrow-left-2-32.ico"></button>
+                    <button class= "" id= "" onclick= "pokemonStats(${previous})"><img src="./static/source/img/arrow-left-2-32.ico"></button>
                     <button class= "" id= "" onclick= "closeStats()">(close)</button>
-                    <button class= "" id= "" onclick= "goNext(${data})"><img src="./img/arrow-right-2-32.ico"></button>
+                    <button class= "" id= "" onclick= "pokemonStats(${next})"><img src="./static/source/img/arrow-right-2-32.ico"></button>
                 </div>
             </div>`;
 }
 
 
 function templateBaseStats(baseStats) {
-    return `<div class="stats_bars">
-                <h3>Health Points:</h3>
-                <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" aria-label="Success example" style="width: ${(baseStats['HP']) * 0.75}%" aria-valuemin="0" aria-valuemax="100">${baseStats['HP']} </div>
-                </div>
-                <h3>Attack:</h3>
-                <div class="progress">
-                    <div class="progress-bar bg-danger" role="progressbar" aria-label="Danger example" style="width: ${baseStats['Attack'] * 0.75}%" aria-valuemin="0" aria-valuemax="100">${baseStats['Attack']}</div>
-                </div>
-                <h3>Defense:</h3>
-                    <div class="progress">
-                <div class="progress-bar bg-warning" role="progressbar" aria-label="Warning example" style="width: ${baseStats['Defense'] * 0.75}%" aria-valuemin="0" aria-valuemax="100">${baseStats['Defense']}</div>
-                </div>
-                <h3>Special-Attack:</h3>
-                <div class="progress">
-                    <div class="progress-bar bg-danger" role="progressbar" aria-label="Danger example" style="width: ${baseStats['Special-Attack'] * 0.75}%" aria-valuemin="0" aria-valuemax="100">${baseStats['Special-Attack']}</div>
-                </div>
-                <h3>Special-Defense:</h3>
-                <div class="progress">
-                    <div class="progress-bar bg-warning" role="progressbar" aria-label="Warning example" style="width: ${baseStats['Special-Defense'] * 0.75}%" aria-valuemin="0" aria-valuemax="100">${baseStats['Special-Defense']}</div>
-                </div>
-                <h3>Speed:</h3>
-                <div class="progress">
-                    <div class="progress-bar bg-info" role="progressbar" aria-label="Info example" style="width: ${baseStats['Speed'] * 0.75}%" aria-valuemin="0" aria-valuemax="100">${baseStats['Speed']}</div>
-                </div>
-            </div>`;
+    return ``;
 }
