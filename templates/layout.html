@@ -4,11 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style_card_and_stats.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style_media.css')}}">
     <script src="{{url_for('static', filename='script/script_templates.js') }}"></script>
     <script src="{{url_for('static', filename='script/script.js') }}"></script>
+    <link rel="shortcut icon" href="{{url_for('static', filename='./source/img/icon_pokemon.png')}}"
+        type="image/x-icon">
     <title>Pokedex By Corneliu Zediu</title>
 </head>
 
@@ -21,8 +25,7 @@
         </div>
         <!-- Search area -->
         <div class="search__wrapper">
-            <input id="search__input--id" type="search" placeholder="Search pokemon ..." onkeyup="searchPokemon(event)"
-                onclick="clearSearch(event)">
+            <input id="search__input--id" type="search" placeholder="Search pokemon ..." onkeyup="searchPokemon(event)" onclick="clearSearch(event)">
         </div>
     </nav>
 

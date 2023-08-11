@@ -26,29 +26,35 @@ colors = {
 
 // VARIABLES
 let pokemonList;
+let generalInfoBool = true;
+let cardOpen = false;
+let isLoading = false;
+let limit = 100;
+let next;
+let previous;
 
 // FUNTIONS
 
 const fetchPokemon = () => {
-    let promises = []  //Makes an array of all the promisses from feth function
-    for (let i = 1; i <= 150; i++) {
-        const url = `https://pokeapi.co/api/v2/pokemon/${i}`; // Base URL
-        promises.push(fetch(url).then((result) => { return result.json() })); // Transform the feth into json format
-    }
+    if (!isLoading) {
+        let promises = []  //Makes an array of all the promisses from feth function
+        for (let i = 1; i <= limit; i++) {
+            const url = `https://pokeapi.co/api/v2/pokemon/${i}`; // Base URL
+            promises.push(fetch(url).then((result) => { return result.json() })); // Transform the feth into json format
+        }
 
-    Promise.all(promises).then(result => { // Provides all the pokemons at the same time 
-        const pokemon = result.map((data) =>
-        ({
-            name: data.name,
-            id: data.id,
-            image: data['sprites']['other']['official-artwork']['front_default'],
-            types: data.types,
-        }))
-        // console.log(pokemon)
-        pokemonList = pokemon
-        displayPokemonCard(pokemon)
-        // console.log(pokemonList);
-    })
+        Promise.all(promises).then(result => { // Provides all the pokemons at the same time 
+            const pokemon = result.map((data) =>
+            ({
+                name: data.name,
+                id: data.id,
+                image: data['sprites']['other']['official-artwork']['front_default'],
+                types: data.types,
+            }))
+            pokemonList = pokemon
+            displayPokemonCard(pokemon)
+        })
+    }
 }
 
 const displayPokemonCard = (pokemon) => {
@@ -62,30 +68,39 @@ const pokemonStats = async (id) => {
     response = await fetch(url)
     data = await response.json()
     generateStatsDiv(data);
-    showBaseStatsOnClick(data)
+    generalInfoBool ? showGeneralInfo() : showMainStats()
+    showBaseStatsOnClick()
 
 }
 
 function closeStats() {
+    cardOpen = false;
     document.getElementById('stats__wrapper').classList.add('d-none');
     document.querySelector('body').style.overflowY = ('unset');
     document.getElementById('cards__wrapper').classList.remove('blur');
 }
 
-function showBaseStatsOnClick(data) {
+function showBaseStatsOnClick() {
+    cardOpen = true
     document.getElementById('stats__wrapper').classList.remove('d-none');
 }
 
 
 function showMainStats() {
+    generalInfoBool = false
     document.getElementById('more__info--container').classList.add('d-none')
+    document.getElementById('more__info--button').classList.remove('heighlight')
     document.getElementById('base__stats--container').classList.remove('d-none')
+    document.getElementById('base__stats--button').classList.add('heighlight')
 }
 
 
 function showGeneralInfo() {
+    generalInfoBool = true
     document.getElementById('more__info--container').classList.remove('d-none')
+    document.getElementById('more__info--button').classList.add('heighlight')
     document.getElementById('base__stats--container').classList.add('d-none')
+    document.getElementById('base__stats--button').classList.remove('heighlight')
 }
 
 function generateStatsDiv(i) {
@@ -99,10 +114,39 @@ function stopPropagation(event) {
 }
 
 
+//Search for pokemon
+function searchPokemon(event) {
+    let searchInput = event.target.value.toLowerCase();
+    let filterPokemon = pokemonList.filter((pokemon) => {
+        return (pokemon['name'].toLowerCase().includes(searchInput));
+    })
+    displayPokemonCard(filterPokemon)
+}
+
+
+function clearSearch(event) {
+    searchInput = 0
+    searchPokemon(event)
+    displayPokemonCard(pokemonList)
+}
+
+
 // The funtions are called when the DOM Content is full loaded 
 document.addEventListener("DOMContentLoaded", () => {
-    // console.log(pokemonList);
+    getControllers()
 })
+
+
+// Use arrow to navigate between the cards
+function getControllers() {
+    document.addEventListener('keyup', (e) => {
+        if (cardOpen) {
+            if (e.keyCode == 39) pokemonStats(next);        // Right arrow
+            if (e.keyCode == 37) pokemonStats(previous);    // Left arrow
+            if (e.keyCode == 27) closeStats();              // ESC key
+        }
+    })
+}
 
 
 fetchPokemon();
