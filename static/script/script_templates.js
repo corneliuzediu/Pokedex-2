@@ -28,7 +28,8 @@ function templateCardDiv(pokemon) {
 //Template for Card Stats 
 function templateCardStatDiv(pokemon) {
     const backgroundColor = colors[pokemon.types[0].type.name];
-    pokemon['id'] != limit ? next = parseInt(pokemon['id']) + 1 : next = limit;
+    let index = getIndexInPokemonList(pokemon)
+    pokemon['id'] !== limit ? next = parseInt(pokemon['id']) + 1 : next = limit;
     pokemon['id'] > 1 ? previous = parseInt(pokemon['id']) - 1 : previous = 1;
     // Generate HTML Element for each ability
     const abilities = pokemon.abilities.map(ability => {
@@ -103,10 +104,10 @@ function templateCardStatDiv(pokemon) {
                             </div>
                         </div>                                             
                     </div>
-                                 <div class="stats__buttons">
-                    <button class= "" id= "" onclick= "pokemonStats(${previous})"><img src="./static/source/img/arrow-left-2-32.ico"></button>
+                                <div class="stats__buttons">
+                    <button class= "" id= "" onclick= "changePokemonCard(${pokemon['id']},${previous})"><img src="./static/source/img/arrow-left-2-32.ico"></button>
                     <button class= "" id= "" onclick= "closeStats()">(close)</button>
-                    <button class= "" id= "" onclick= "pokemonStats(${next})"><img src="./static/source/img/arrow-right-2-32.ico"></button>
+                    <button class= "" id= "" onclick= "changePokemonCard(${pokemon['id']},${next})"><img src="./static/source/img/arrow-right-2-32.ico"></button>
                 </div>
             </div>`;
 }

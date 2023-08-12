@@ -25,11 +25,12 @@ colors = {
 
 
 // VARIABLES
-let pokemonList;
+let pokemonList = [];
+let searchPokemonList = [];
 let generalInfoBool = true;
 let cardOpen = false;
 let isLoading = false;
-let limit = 100;
+let limit = 150;
 let next;
 let previous;
 
@@ -51,8 +52,8 @@ const fetchPokemon = () => {
                 image: data['sprites']['other']['official-artwork']['front_default'],
                 types: data.types,
             }))
-            pokemonList = pokemon
-            displayPokemonCard(pokemon)
+            pokemon.forEach((poke) => pokemonList.push(poke))
+            displayPokemonCard(pokemonList)
         })
     }
 }
@@ -116,11 +117,13 @@ function stopPropagation(event) {
 
 //Search for pokemon
 function searchPokemon(event) {
+    searchPokemonList = pokemonList
     let searchInput = event.target.value.toLowerCase();
-    let filterPokemon = pokemonList.filter((pokemon) => {
+    let filterPokemon = searchPokemonList.filter((pokemon) => {
         return (pokemon['name'].toLowerCase().includes(searchInput));
     })
     displayPokemonCard(filterPokemon)
+    searchPokemonList = filterPokemon
 }
 
 
@@ -146,6 +149,52 @@ function getControllers() {
             if (e.keyCode == 27) closeStats();              // ESC key
         }
     })
+}
+
+
+const fetchMorePokemon = () => {
+    let newLimit = limit + 20;
+    if (!isLoading) {
+        let promises = []  //Makes an array of all the promisses from feth function
+        for (let i = limit + 1; i <= newLimit; i++) {
+            const url = `https://pokeapi.co/api/v2/pokemon/${i}`; // Base URL
+            promises.push(fetch(url).then((result) => { return result.json() })); // Transform the feth into json format
+        }
+
+        Promise.all(promises).then(result => { // Provides all the pokemons at the same time 
+            const pokemon = result.map((data) =>
+            ({
+                name: data.name,
+                id: data.id,
+                image: data['sprites']['other']['official-artwork']['front_default'],
+                types: data.types,
+            }))
+            debugger
+            pokemonList = pokemonList.concat(pokemon)
+            displayPokemonCard(pokemonList)
+        })
+        limit = newLimit
+        pokemonList = pokemonList
+    }
+}
+
+const getIndexInPokemonList = (clickedPokemon) => {
+    const index = pokemonList.findIndex(pokemon => pokemon.id === clickedPokemon['id'])
+    return index
+}
+
+const changePokemonCard = (index, direction) => {
+    debugger
+    if (limit == searchPokemonList.length) {
+        pokemonStats(direction)
+    } else if (searchPokemonList.length == 1) {
+        console.log("just one piece")
+    } else {
+        let newIndex = searchPokemonList.findIndex(pokemon => pokemon['id'] === index);
+        // debugger
+        if (index < direction && newIndex <= searchPokemonList.length) pokemonStats((searchPokemonList[newIndex + 1].id));
+        if (index > direction && newIndex >= 1) pokemonStats((searchPokemonList[newIndex - 1].id));
+    }
 }
 
 
