@@ -3,12 +3,14 @@
 
 {% block main %}
 <ol id="cards__wrapper" class="cards__wrapper"></ol>
+<div id="loading_indicator" style="position: absolute; display: flex;justify-content: center; width: 100%;">
+    Loading the initial 151 Pokemon ...
+</div>
 <!-- Base stats Area -->
 <div id="stats__wrapper" class="stats__wrapper d-none" onclick="closeStats()">
     <div id="stats__container" class="stats__container"></div>
 </div>
 
-<button onclick="fetchMorePokemon()">Add more pokemons</button>
 
 
 {% endblock %}

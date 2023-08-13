@@ -14,7 +14,7 @@
 
 .stats__container {
     display: flex;
-    width: 400px;
+    width: 450px;
     height: 500px;
     z-index: 11;
     background-color: aliceblue;
@@ -40,7 +40,7 @@
 
 .stats__info {
     min-width: 100%;
-    padding-inline: 35px;
+    padding-inline: 30px;
 }
 
 
@@ -93,7 +93,7 @@
     bottom: 0px;
     width: 100%;
     display: flex;
-    padding-inline: 20px;
+    padding-inline: 30px;
     padding-block: 5px;
     justify-content: space-between;
 }

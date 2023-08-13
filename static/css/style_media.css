@@ -1,6 +1,73 @@
-@media(max-width:570px) {
+@media(min-width:1400px) {
+    .stats__container {
+        width: 700px;
+        height: 600px;
+    }
+
+
+    .stats__info h2 {
+        padding-top: 15px;
+        font-size: 2rem;
+    }
+
+
+    .stats__img__type {
+        padding-block: 10px;
+    }
+
+
+    .stats__img__type img {
+        width: 150px;
+        height: 150px;
+    }
+
+
+    .stats__img__logo img:first-child {
+        height: 100px;
+        width: 100px;
+    }
+
+
+    .more__info--button,
+    .base__stats--button,
+    .species--class,
+    .height--class,
+    .weight--class,
+    .abilities--class,
+    .stats_bars h3 {
+        font-size: 1.3rem;
+    }
+
+
+    .stats_bars {
+        padding-inline: 30px;
+    }
+
+
+    .stats_bars div {
+        font-size: 1rem;
+        height: 25px;
+    }
+
+
+    .base__stats--container {
+        padding-block: 10px;
+    }
+}
+
+@media(max-width:675px) {
     .header__container {
-        padding-inline: 20px;
+        padding-inline: 30px;
+    }
+
+
+    .switch__pokemonsList {
+        position: absolute;
+        top: 100px;
+        right: 30px;
+        display: flex;
+        justify-content: space-between;
+        width: 220px;
     }
 
 
@@ -13,17 +80,58 @@
         font-size: 0.9rem;
         padding-left: 10px;
         padding-block: 5px;
-        width: 180px;
+        width: 210px;
     }
 
 
     .cards__wrapper {
-        margin-top: 80px;
+        margin-top: 120px;
     }
 
 
     .card__container {
         width: 100%;
+    }
+}
+
+
+@media(max-width:480px) {
+    .search__wrapper {
+        position: absolute;
+        top: 100px;
+        left: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-inline: 30px;
+    }
+
+
+    .search__wrapper input {
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+
+    .switch__pokemonsList {
+        position: unset;
+    }
+
+
+    .cards__wrapper {
+        margin-top: 150px;
+    }
+
+
+    .stats__container {
+        width: 370px;
+    }
+
+
+    .abilities--class {
+        white-space: pre-wrap;
+        text-align: center;
     }
 }
 
@@ -34,28 +142,28 @@
     }
 
 
-    .search__wrapper input {
-        font-size: 0.8rem;
-        width: 155px;
-        text-align: center;
-        margin-right: 10px;
-        padding-right: 0px;
-    }
-
-
-    .logo__wrapper img:first-child {
-        display: none;
+    .logo__wrapper {
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        padding-inline: 30px;
+        width: 100%;
     }
 
 
     .stats__container {
-        width: 300px;
-        height: 400px;
+        width: 90vw;
+        height: 500px;
     }
 
 
-    .card__container--info h2 {
-        font-size: 1rem;
+    .card__container--img img {
+        height: 80%;
+        align-self: center;
+    }
+
+
+    .card__container--show_stats {
+        width: 100px;
     }
 
 
@@ -72,6 +180,17 @@
 
     .stats__img__logo img:nth-child(1) {
         height: 40px;
+        width: 40px;
+    }
+
+
+    .stats_bars {
+        gap: 5px;
+    }
+
+
+    .stats__buttons {
+        padding-inline: 10px;
     }
 
 
@@ -80,15 +199,13 @@
         width: 20px;
     }
 
-
-    .species--class h3,
-    .species--class p,
-    .height--class h3,
-    .height--class p,
-    .weight--class h3,
-    .weight--class p,
-    .abilities--class h3,
-    .abilities--class p {
+    .more__info--button,
+    .base__stats--button,
+    .species--class,
+    .height--class,
+    .weight--class,
+    .abilities--class,
+    .stats_bars h3 {
         font-size: 0.9rem;
     }
 
@@ -100,5 +217,16 @@
 
     .info__and__stats button {
         font-size: 0.9rem;
+    }
+
+
+    .more__info--container {
+        justify-content: flex-end;
+    }
+
+    .stats_bars>div,
+    .more__info--container>div {
+        flex-direction: column;
+        gap: 5px;
     }
 }
