@@ -1,5 +1,33 @@
-{% extends "layout.html" %}
-
 {% block footer %}
+
+
+<footer class="header__container footer">
+    <!-- Logo & Name-->
+    <div class="logo__wrapper" onclick="window.location.reload()">
+        <img src="./static/source/img/icon_pokemon.png">
+        <img src="./static/source/img/logo.png">
+    </div>
+    <div class="footer__mid">
+        <div>&#9400;    Copyright Corneliu Zediu</div>
+        <div class="footer__mid--links">
+            <a href="/impressum"> Impressum </a>
+            <a href="/disclaimer"> Disclaimer </a>
+            <a href="/privacy_policy"> Privacy Policy </a>
+        </div>
+
+    </div>
+
+    <div class="footer__links">
+        <a href="https://github.com/corneliuzediu"><img src="./static/source/img/github_logo_white.png">
+            <p>Githun</p>
+        </a>
+        <a href="https://www.linkedin.com/in/corneliuzediu"><img src="./static/source/img/linkedin_logo_white.png">
+            <p>LinkedIn</p>
+        </a>
+        <a href="https://www.corneliu-zediu.com"><img src="./static/source/img/logo_white.png">
+            <p>Portfolio</p>
+        </a>
+    </div>
+</footer>
 
 {% endblock %}

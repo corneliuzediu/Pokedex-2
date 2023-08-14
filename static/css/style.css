@@ -27,7 +27,8 @@ body::-webkit-scrollbar {
     display: none !important;
 }
 
-.scroll-none{
+
+.scroll-none {
     overflow-y: hidden !important;
 }
 
@@ -37,8 +38,8 @@ body::-webkit-scrollbar {
     position: absolute;
     top: calc(50% - 32px);
     left: calc(50% - 32px);
-    width: 64px;
-    height: 64px;
+    width: 84px;
+    height: 84px;
     border-radius: 50%;
     perspective: 800px;
 }
@@ -299,8 +300,55 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 
-.switch__pokemonsList{
+.switch__pokemonsList {
     padding-top: 5px;
     display: flex;
     justify-content: space-around;
+}
+
+
+.footer {
+    position: absolute;
+    bottom: 0px;
+    top: unset;
+}
+
+
+.footer__mid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    color: white;
+}
+
+
+.footer__mid--links {
+    display: flex;
+    gap: 15px;
+}
+
+
+.footer__mid--links a {
+    color: white;
+}
+
+
+.footer__links {
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+}
+
+
+.footer__links a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    color: white;
+}
+
+.footer__links img {
+    height: 30px;
 }

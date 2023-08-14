@@ -9,6 +9,21 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/impressum", )
+def impressum():
+    return render_template("impressum.html")
+
+
+@app.route("/disclaimer", )
+def disclaimer():
+    return render_template("disclaimer.html")
+
+
+@app.route("/privacy_policy", )
+def privacyPolicy():
+    return render_template("privacy_policy.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True)
 

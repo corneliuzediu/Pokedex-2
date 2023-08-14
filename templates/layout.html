@@ -17,34 +17,16 @@
 </head>
 
 <body>
-    <nav class="header__container">
-        <!-- Logo & Name-->
-        <div class="logo__wrapper" onclick="window.location.reload()">
-            <img src="./static/source/img/icon_pokemon.png">
-            <img src="./static/source/img/logo.png">
-        </div>
-        <!-- Search area -->
-        <div class="search__wrapper">
-            <input id="search__input--id" type="search" placeholder="Search pokemon in list ..."
-                onkeyup="searchPokemon(event)">
-            <div class="form-check form-switch switch__pokemonsList">
-                <label class="form-check-label" for="switch">Get all Pokemon!</label>
-                <input class="form-check-input" type="checkbox" role="switch" id="switch">
-            </div>
-        </div>
-    </nav>
+
+    {% include "header.html" %}
 
 
     {% block main %}{% endblock %}
 
-    <div class="cards_loading-animation d-none" id="cards_loading-animation">
-        <div class="loader">
-            <div class="inner one"></div>
-            <div class="inner two"></div>
-            <div class="inner three"></div>
-        </div>
-    </div>
 
+    {% include "footer.html" %}
+
+    
 </body>
 
 </html>

@@ -30,7 +30,7 @@ let allPokemons = []
 let generalInfoBool = true;
 let cardOpen = false;
 let allowLoading = true;
-let initialLoad = 151;
+let initialLoad = 1;
 let limitLoad = 1010;
 let next;
 let previous;
@@ -90,6 +90,7 @@ const fetchMorePokemon = () => {
         })
         initialLoad = newLimit
         pokemonList = pokemonList
+        document.getElementById('loading_indicator').innerHTML = 'Loading more pokemons ...'
     }
 }
 
@@ -304,7 +305,7 @@ const switchPokemonList = () => {
     switchToogle.addEventListener("change", function () {
         document.getElementById('search__input--id').value = '';
         if (this.checked) { // If selected, raise initial load to the maximum value
-            indicatorHTML.innerHTML = "Loading all Pokemon ..."
+            indicatorHTML.innerHTML = "All Pokemons are loaded!"
             initialLoad = limitLoad;
         } else {
             indicatorHTML.innerHTML = "Loading the initial 151 Pokemon ..."
@@ -340,5 +341,5 @@ window.addEventListener('scroll', () => {
     const distanceToBottom = document.documentElement.scrollHeight - window.innerHeight - window.scrollY;
     const trashhold = 100
     // Calls the funtion to fetch more pokemons if the limit of existing pokemon in the list is not reached.
-    distanceToBottom <= trashhold && initialLoad != limitLoad ? fetchMorePokemon() : null
+    // distanceToBottom <= trashhold && initialLoad != limitLoad ? fetchMorePokemon() : null
 });
