@@ -30,7 +30,7 @@ let allPokemons = []
 let generalInfoBool = true;
 let cardOpen = false;
 let allowLoading = true;
-let initialLoad = 1;
+let initialLoad = 151;
 let limitLoad = 1010;
 let next;
 let previous;
@@ -41,26 +41,24 @@ let previous;
  * Fetch the pokemon from the PokeAPI and creating an array of pokemons
  */
 const fetchPokemon = () => {
-    if (allowLoading) {
-        pokemonList = []    // Reset the pokemon list for toogle between 151 Pokemon List and All Pokemon List
-        let promises = []   // Makes an array of all the promisses from feth function
-        for (let i = 1; i <= initialLoad; i++) {
-            const url = `https://pokeapi.co/api/v2/pokemon/${i}`; // Base URL
-            promises.push(fetch(url).then((result) => { return result.json() })); // Transform the feth into json format
-        }
-
-        Promise.all(promises).then(result => { // Provides all the pokemons at the same time 
-            const pokemonMap = result.map((data) =>
-            ({
-                name: data.name,
-                id: data.id,
-                image: data['sprites']['other']['official-artwork']['front_default'],
-                types: data.types,
-            }))
-            pokemonMap.forEach((pokemon) => pokemonList.push(pokemon))   // Add each pokemon into pokemon list
-            displayPokemonCard(pokemonList)
-        })
+    pokemonList = []    // Reset the pokemon list for toogle between 151 Pokemon List and All Pokemon List
+    let promises = []   // Makes an array of all the promisses from feth function
+    for (let i = 1; i <= initialLoad; i++) {
+        const url = `https://pokeapi.co/api/v2/pokemon/${i}`; // Base URL
+        promises.push(fetch(url).then((result) => { return result.json() })); // Transform the feth into json format
     }
+
+    Promise.all(promises).then(result => { // Provides all the pokemons at the same time 
+        const pokemonMap = result.map((data) =>
+        ({
+            name: data.name,
+            id: data.id,
+            image: data['sprites']['other']['official-artwork']['front_default'],
+            types: data.types,
+        }))
+        pokemonMap.forEach((pokemon) => pokemonList.push(pokemon))   // Add each pokemon into pokemon list
+        displayPokemonCard(pokemonList)
+    })
 }
 
 /**
@@ -70,6 +68,7 @@ const fetchMorePokemon = () => {
     addLoadingAnimation();
     let newLimit = initialLoad + 20;
     if (allowLoading) {
+        debugger
         let promises = []  // Makes an array of all the promisses from feth function
         newLimit < 990 ? newLimit : newLimit = finalLoad() // Limit the iteration to be into the API data limit.
         for (let i = initialLoad + 1; i <= newLimit; i++) {
@@ -251,7 +250,7 @@ const changePokemonCard = (pokeID, newPokeID) => {
  * Provides UI loading animation
  */
 const addLoadingAnimation = () => {
-    allowLoading ? document.getElementById('cards_loading-animation').classList.remove('d-none') : null
+    document.getElementById('cards_loading-animation').classList.remove('d-none');
 }
 
 
@@ -283,16 +282,33 @@ const toogleScroll = () => {
 }
 
 
+/**
+ * Go to maine route
+ */
+const goToMainPage = () => {
+    window.location.href = "/"
+}
+
+
+const disableSearch = () => {
+    document.getElementById('search').classList.add('d-none')
+}
+
+
 
 // EVENT LISTENERS
 /**
  * Calls a serie of functions after the DOM is loaded
  */
 document.addEventListener("DOMContentLoaded", () => {
-    addLoadingAnimation();
-    fetchPokemon();
-    switchPokemonList();
-    getControllers();
+    if (window.location.pathname == '/') {
+        addLoadingAnimation();
+        fetchPokemon();
+        switchPokemonList();
+        getControllers();
+    } else {
+        disableSearch();
+    }
 })
 
 
@@ -302,19 +318,26 @@ document.addEventListener("DOMContentLoaded", () => {
 const switchPokemonList = () => {
     const switchToogle = document.getElementById("switch");
     const indicatorHTML = document.getElementById('loading_indicator');
+    const labelSwitch = document.getElementById('label_switch');
     switchToogle.addEventListener("change", function () {
+        allowLoading = false
         document.getElementById('search__input--id').value = '';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         if (this.checked) { // If selected, raise initial load to the maximum value
-            indicatorHTML.innerHTML = "All Pokemons are loaded!"
+            labelSwitch.innerHTML = "Get the initial Pokemons!"
+            indicatorHTML.innerHTML = "All Pokemons are loading. Please wait!";
             initialLoad = limitLoad;
-        } else {
+        } else if (this.checked == false) {
             indicatorHTML.innerHTML = "Loading the initial 151 Pokemon ..."
+            labelSwitch.innerHTML = "Get all Pokemons!"
             initialLoad = 151; // Reinitialise the initial load value to 151, coresponding the initial 151 pokemons
         }
-        addLoadingAnimation(); 
+        addLoadingAnimation();
         document.getElementById('cards__wrapper').innerHTML = ''; // Reset board
         fetchPokemon(); // Fetch the pokemons
         searchPokemonList = pokemonList // Set the searched list to the current list
+        allowLoading = true
+        // debugger
     });
 }
 
@@ -341,5 +364,5 @@ window.addEventListener('scroll', () => {
     const distanceToBottom = document.documentElement.scrollHeight - window.innerHeight - window.scrollY;
     const trashhold = 100
     // Calls the funtion to fetch more pokemons if the limit of existing pokemon in the list is not reached.
-    // distanceToBottom <= trashhold && initialLoad != limitLoad ? fetchMorePokemon() : null
+    distanceToBottom <= trashhold && initialLoad != limitLoad ? fetchMorePokemon() : null
 });

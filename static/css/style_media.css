@@ -55,19 +55,39 @@
     }
 }
 
+
+@media(max-width:800px) {
+    .footer__links {
+        width: 135px;
+    }
+
+
+    .footer__mid {
+        gap: unset;
+    }
+}
+
+
 @media(max-width:675px) {
     .header__container {
         padding-inline: 30px;
     }
 
 
-    .switch__pokemonsList {
+    .switch__wrapper {
         position: absolute;
-        top: 100px;
-        right: 30px;
-        display: flex;
-        justify-content: space-between;
-        width: 220px;
+        top: 85px;
+        right: 0px;
+        left: 0px;
+        backdrop-filter: blur(5px);
+    }
+
+    .switch__pokemonsList {
+        align-items: center;
+        justify-content: end;
+        gap: 50px;
+        width: 100%;
+        padding-inline: 50px;
     }
 
 
@@ -92,30 +112,66 @@
     .card__container {
         width: 100%;
     }
+
+
+    .name_logo {
+        display: none;
+    }
+
+
+    .footer__portfolio {
+        width: unset;
+    }
+
+
+    .footer__links {
+        justify-content: end;
+        gap: 15px;
+        width: 100px;
+        width: unset;
+    }
+
+
+    .footer__mid {
+        font-size: 0.8rem;
+    }
 }
 
 
 @media(max-width:480px) {
+
     .search__wrapper {
         position: absolute;
-        top: 100px;
+        top: 85px;
+        padding-block: 15px;
         left: 0;
         right: 0;
+        height: 90px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding-inline: 30px;
+        backdrop-filter: blur(5px);
     }
 
 
     .search__wrapper input {
-        width: 100%;
+        width: 80%;
         background-color: rgba(0, 0, 0, 0.1);
     }
 
 
-    .switch__pokemonsList {
-        position: unset;
+    .search__wrapper input::placeholder{
+        color: black;
+    }
+
+    .search__wrapper input:hover,
+    .search__wrapper input:focus {
+        background-color: white;
+    }
+
+
+    .switch__wrapper {
+        top: 50px;
     }
 
 
@@ -132,6 +188,11 @@
     .abilities--class {
         white-space: pre-wrap;
         text-align: center;
+    }
+
+
+    .footer__links {
+        flex-direction: column;
     }
 }
 

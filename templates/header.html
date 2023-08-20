@@ -2,17 +2,19 @@
 
 <nav class="header__container">
     <!-- Logo & Name-->
-    <div class="logo__wrapper" onclick="window.location.reload()">
+    <div class="logo__wrapper" onclick="goToMainPage()">
         <img src="./static/source/img/icon_pokemon.png">
         <img src="./static/source/img/logo.png">
     </div>
     <!-- Search area -->
-    <div class="search__wrapper">
+    <div class="search__wrapper" id="search">
         <input id="search__input--id" type="search" placeholder="Search pokemon in list ..."
             onkeyup="searchPokemon(event)">
-        <div class="form-check form-switch switch__pokemonsList">
-            <label class="form-check-label" for="switch">Get all Pokemon!</label>
-            <input class="form-check-input" type="checkbox" role="switch" id="switch">
+        <div class="switch__wrapper">
+            <div class="form-check form-switch switch__pokemonsList">
+                <label id="label_switch" class="form-check-label" for="switch">Get all Pokemons!</label>
+                <input class="form-check-input" type="checkbox" role="switch" id="switch">
+            </div>
         </div>
     </div>
 </nav>
