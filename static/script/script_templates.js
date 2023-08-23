@@ -1,12 +1,18 @@
-// Template for each Pokemon Card
+/**
+ * 
+ * @param {*} pokemon - Informations of pokemon to be displayed
+ * @returns - HTML template of the pokemon card
+ */
 function templateCardDiv(pokemon) {
+    // Provide the proper background color for the template
     const backgroundColor = colors[pokemon.types[0].type.name];
-    // Generate HTML elements for each type
 
+    // Get element type for each pokemon
     const typeElements = pokemon.types.map(type => {
         const typeColor = colors[type.type.name];
         return `<p class="type__element" style="background-color: ${typeColor};">${type.type.name}</p>`;
     }).join('');
+
     // Generate Main Card HTML element
     return `
     <div id="card__container-${pokemon['id']}" class='card__container' onclick="pokemonStats(${pokemon.id})" style="background-color: ${backgroundColor}">
@@ -25,16 +31,22 @@ function templateCardDiv(pokemon) {
 }
 
 
-//Template for Card Stats 
+/**
+ * 
+ * @param {*} pokemon - Informations of pokemon to be displayed
+ * @returns - HTML Template of the stats of the pokemon
+ */
 function templateCardStatDiv(pokemon) {
+    // Provide the proper background color for the template
     const backgroundColor = colors[pokemon.types[0].type.name];
-    let index = getIndexInPokemonList(pokemon)
+
+    // Privides the infromation of the next pokemon card
     pokemon['id'] !== initialLoad ? next = parseInt(pokemon['id']) + 1 : next = initialLoad;
     pokemon['id'] > 1 ? previous = parseInt(pokemon['id']) - 1 : previous = 1;
+
     // Generate HTML Element for each ability
-    const abilities = pokemon.abilities.map(ability => {
-        return `<span>${ability.ability['name']}</span>`;
-    }).join(', ')
+    const abilities = pokemon.abilities.map(ability => { return `<span>${ability.ability['name']}</span>`; }).join(', ')
+
     // Generate HTML Element with Genral Info
     return `<div id="stats__show--id-${pokemon}" class ="stats__show" onclick="stopPropagation(event)" style="background-color: ${backgroundColor}">
                 <div class="stats__info card__container--info">

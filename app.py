@@ -1,7 +1,6 @@
-from flask import Flask, render_template, request
-from helpers import get_pokemon_info
+from flask import Flask, render_template,send_from_directory
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', static_url_path='/static')
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -9,12 +8,12 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/impressum", )
+@app.route("/impressum")
 def impressum():
     return render_template("impressum.html")
 
 
-@app.route("/disclaimer", )
+@app.route("/disclaimer")
 def disclaimer():
     return render_template("disclaimer.html")
 
