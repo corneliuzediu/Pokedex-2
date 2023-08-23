@@ -190,6 +190,7 @@ input[type="search"]::-webkit-search-results-decoration {
     gap: 15px;
     width: 100%;
     padding: 30px;
+    padding-bottom: 120px;
 }
 
 

@@ -66,9 +66,9 @@ const fetchPokemon = async () => {
  * Fetch more pokemons after the initial fetch
  */
 const fetchMorePokemon = () => {
-    addLoadingAnimation();
-    let newLimit = initialLoad + 20;
     if (allowLoading) {
+        addLoadingAnimation();
+        let newLimit = initialLoad + 20;
         let promises = []  // Makes an array of all the promisses from feth function
         newLimit < 990 ? newLimit : newLimit = finalLoad() // Limit the iteration to be into the API data limit.
         for (let i = initialLoad + 1; i <= newLimit; i++) {
@@ -204,8 +204,8 @@ function stopPropagation(event) {
  */
 function searchPokemon(event) {
     document.getElementById('loading_indicator').innerHTML = ''; // Clear loading indicator
-    searchPokemonList = pokemonList // Initializes the searching list and preserving the initial list
     searchPokemonList.length === initialLoad ? allowLoading = true : allowLoading = false; // Restrict the fetching of more Pokemon when at the bottom of the page
+    searchPokemonList = pokemonList // Initializes the searching list and preserving the initial list
     let searchInput = event.target.value.toLowerCase(); // Transform all input into lowcase for filter
     let filterPokemon = searchPokemonList.filter((pokemon) => {
         return (pokemon['name'].toLowerCase().includes(searchInput)); // Return a list of all the pokemons that are metching the searched input 

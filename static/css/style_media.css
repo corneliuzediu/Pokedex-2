@@ -96,11 +96,13 @@
     }
 
 
-    .search__wrapper input {
+    .search__wrapper input,
+    #label_switch, #loading_indicator {
         font-size: 0.9rem;
-        padding-left: 10px;
+        padding-inline: 10px;
         padding-block: 5px;
         width: 210px;
+        white-space: nowrap;
     }
 
 
@@ -135,11 +137,15 @@
     .footer__mid {
         font-size: 0.8rem;
     }
+
+    
+    #documentation{
+        display: none;
+    }
 }
 
 
 @media(max-width:480px) {
-
     .search__wrapper {
         position: absolute;
         top: 85px;
@@ -160,7 +166,7 @@
     }
 
 
-    .search__wrapper input::placeholder{
+    .search__wrapper input::placeholder {
         color: black;
     }
 
@@ -172,6 +178,11 @@
 
     .switch__wrapper {
         top: 50px;
+    }
+
+
+    .switch__pokemonsList{
+        padding-inline: 30px;
     }
 
 
@@ -198,6 +209,9 @@
 
 
 @media(max-width:410px) {
+    .cards__wrapper{
+        padding-bottom: 200px;
+    }
     .header__container {
         padding-inline: 0px;
     }
@@ -289,5 +303,16 @@
     .more__info--container>div {
         flex-direction: column;
         gap: 5px;
+    }
+
+
+    .footer{
+        padding: 10px;
+        flex-direction: column;
+        height: 180px;
+    }
+
+    .footer__links{
+        flex-direction: row;
     }
 }
