@@ -10,7 +10,7 @@
   The user can access further information by clicking on any of the card. By doing that, the user access the "General info" or to the "Main ststs" of the selected Pokemon.
   
 | General Info                               | Main stats |
-|:---                                       |:---     |s
+|:---                                       |:---     |
 | Species | Health |
 | Height| Attack |
 | Weight | Defense |
