@@ -1,9 +1,9 @@
-from flask import Flask, render_template,send_from_directory
+from flask import Flask, render_template
 
 app = Flask(__name__, static_folder='static', static_url_path='/static')
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def index():
     return render_template("index.html")
 
@@ -18,7 +18,5 @@ def disclaimer():
     return render_template("disclaimer.html")
 
 
-
 if __name__ == "__main__":
-    app.run( host='0.0.0.0', port=5000)
-
+    app.run(host='0.0.0.0', port=5000)
