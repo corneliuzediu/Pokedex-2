@@ -3,10 +3,11 @@
   ## _Why Pokedex ?_
 This is my Final Project as part of CS50X Course, based on [PokeAPI](https://pokeapi.co/)
   
-  ## _What is pokedex ?_
-
 I have decided to use this Theme because it integrates multiple aspects of fun learning. From childhood nostalgia, to challenges of manipulating a high volume of data and 
 not the least the joy of sharing the project with friends that love the Pokemons.  
+
+  ## _What is pokedex ?_
+
 
 Pokedex is a web aplication that provides a variety of informations about the original 151 Pokemon and furthermore to a total of 1010 Pokemons. 
   
